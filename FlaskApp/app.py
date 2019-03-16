@@ -4,7 +4,7 @@ import hashlib
 
 app = Flask(__name__)
 
-userlist_dir =  'D:/PythonProject/NewSite/HiComm/FlaskApp/userlist/'
+userlist_dir =  './userlist/'
 
 
 def CreateHash(_password):
@@ -111,3 +111,25 @@ def signUp():
         return json.dumps({'html': '<span>Enter the required fields</span>'})
 if __name__ == "__main__":
     app.run()
+    
+#%%
+"""
+электронные подписи
+асинхронные методы шифрования
+сквозное шифрования
+в android studio браузер вместо 
+
+
+1)вёрстка
+2)в android studio дизайн
+"""    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

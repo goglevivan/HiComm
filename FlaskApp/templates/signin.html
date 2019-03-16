@@ -15,7 +15,7 @@
                     data: $('form').serialize(),
                     type: 'POST',
                     success: function(response) {
-                        document.location.replace(response);
+                        document.location.href(response);
                     },
                     error: function(error) {
                         alert(error);
