@@ -4,7 +4,7 @@ import hashlib
 
 app = Flask(__name__)
 
-userlist_dir =  'D:/PythonProject/NewSite/FlaskApp/userlist/'
+userlist_dir =  'D:/PythonProject/NewSite/HiComm/FlaskApp/userlist/'
 
 
 def CreateHash(_password):
