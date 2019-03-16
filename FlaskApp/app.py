@@ -6,6 +6,10 @@ app = Flask(__name__)
 
 userlist_dir =  'D:/PythonProject/NewSite/HiComm/FlaskApp/userlist/'
 
+def GetLevel(_name):
+    file=open(userlist_dir + _name,"r")
+    return json.load(file)['Level']
+
 
 def CreateHash(_password):
     passStr = str(_password)
@@ -16,7 +20,7 @@ def CreateUser(_name, _email,_password):
     _password = CreateHash(_password)
     data = {'name': _name,
             'Level': 'A',
-            'emaile': _email,
+            'email': _email,
             'password': _password}
     with open(userlist_dir+_name, 'w')as file:
         json.dump(data, file, indent=4, ensure_ascii=False)
@@ -24,9 +28,19 @@ def CreateUser(_name, _email,_password):
 
 
 
-@app.route("/showlenta")
-def showlenta():
-    return render_template('lenta.html')
+@app.route("/showlenta1")
+def showlenta1():
+    return render_template('lenta1.html')
+
+@app.route("/showlenta2")
+def showlenta2():
+    return render_template('lenta2.html')
+
+@app.route("/showlenta3")
+def showlenta3():
+    return render_template('lenta3.html')
+
+
 
 @app.route("/showadmin")
 def showadmin():
@@ -40,16 +54,24 @@ def CheckUser(_name,_password):
     try:
         file = open(userlist_dir+_name)
     except IOError as e:
-        return json.dumps({'html': '<spain>Username not registrated</spain>'})
+        return render_template('sign.txt')
     else:
         h = json.load(file)['password']
         if h == CreateHash(_password):
             if _name =="admin":
                 return render_template('admin.txt')
             else:
-                return render_template('lenta.txt')
+                userlevel = GetLevel(_name)
+                if userlevel == 'A':
+                    return render_template('lenta1.txt')
+                elif userlevel == 'B':
+                    return render_template('lenta2.txt')
+                elif userlevel == 'C':
+                    return render_template('lenta3.txt')
+
+
         else:
-           return json.dumps({'html': '<spain>Password error</spain>'})
+           return render_template('sign.txt')
 
 
 @app.route("/")
@@ -98,6 +120,7 @@ def signUp():
         CreateUser(_name, _email, _password)
     else:
         #print('Пользователь был создан раньше')
+
         return json.dumps({'html':'<spain>Username occupied</spain>'})
 
 
